@@ -1,11 +1,5 @@
 package code;
 
-/*
-* Kaitlyn Morris
-* Honors Project/Final for CS 465
-* Solor Syatem Visualization
-*/
-
 //Imports 
 import java.nio.*;
 import java.lang.Math;
@@ -194,7 +188,7 @@ public class Code extends JFrame implements GLEventListener, KeyListener {
                        new int[]{0, 0, 0, 0}, new float[]{0.3f, 0.25f, 0.15f, 0.1f}),
          
          new CelestialBody("Saturn", 1430.0f, 9.4f, 0.9f, 0.03f)
-            .withDescription("Known for its spectacular ring system, Saturn is another gas giant with<br>a very low density—low enough to float in water theoretically."),
+            .withDescription("Known for its spectacular ring system, Saturn is another gas giant with<br>a very low densityï¿½low enough to float in water theoretically."),
          
          new CelestialBody("Uranus", 2870.0f, 4.0f, 0.8f, 0.02f)
             .withDescription("An ice giant with a pale blue-green color, Uranus rotates on its side<br>due to an extreme axial tilt, causing unusual 20-year seasons."),
