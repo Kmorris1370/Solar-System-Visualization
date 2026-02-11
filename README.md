@@ -150,8 +150,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Feel free to reach out with questions or suggestions!
 ```
-
-.DS_Store
 bin/
 out/
 .idea/
