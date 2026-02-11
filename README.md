@@ -151,22 +151,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Feel free to reach out with questions or suggestions!
 ```
 
-## Before Posting - Important Cleanup
-
-1. **Remove Personal Information**: I noticed your full name is in the code comments. Consider whether you want this public or use a GitHub username instead.
-
-2. **Fix the Typo**: Line 5 has "Solor Syatem" - fix this to "Solar System"
-
-3. **Add Missing Files**: Make sure you include:
-   - The shader files (vertShader1.glsl, vertShader2.glsl, fragShader1.glsl, fragShader2.glsl)
-   - Utils.java
-   - Sphere.java
-   - All texture files
-
-4. **Add a .gitignore**:
-```
-*.class
-*.jar
 .DS_Store
 bin/
 out/
