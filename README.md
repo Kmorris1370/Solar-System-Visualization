@@ -21,20 +21,6 @@ An interactive 3D visualization of our Solar System built with Java and OpenGL (
   - Direct planet navigation (jump to any planet)
   - Toggle between viewing modes
 
-## Screenshots
-
-![Navigation Mode](screenshots/navigation-mode.png)
-*Close-up view of Saturn with its rings*
-
-![Top-Down View](screenshots/topdown-realistic.png)
-*Realistic distances showing the vast scale of our solar system*
-
-![Scaled View](screenshots/topdown-scaled.png)
-*Scaled view for easier visualization of inner and outer planets*
-
-## Demo
-
-![Solar System Demo](screenshots/demo.gif)
 
 ## Technologies Used
 
@@ -127,13 +113,6 @@ When viewing each planet in Navigation Mode, you'll see fascinating facts about:
 - Planet sizes are not to scale with distances in realistic mode
 - Texture quality depends on available source images
 
-## Future Enhancements
-
-- [ ] Add comet trajectories
-- [ ] Implement planetary axial tilts
-- [ ] Include more moons for outer planets
-- [ ] Add constellation overlay
-- [ ] Spacecraft trajectory visualization
 
 ## Acknowledgments
 
