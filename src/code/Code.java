@@ -8,6 +8,7 @@ import static com.jogamp.opengl.GL4.*;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.util.*;
+import java.awt.KeyboardFocusManager;
 import com.jogamp.common.nio.Buffers;
 import org.joml.*;
 import java.awt.event.*;
@@ -112,6 +113,16 @@ public class Code extends JFrame implements GLEventListener, KeyListener {
       animator = new FPSAnimator(myPanel, 60, true);
       animator.start();
       updateInfoLabel();
+      
+      KeyboardFocusManager.getCurrentKeyboardFocusManager()
+         .addKeyEventDispatcher(new KeyEventDispatcher() {
+            public boolean dispatchKeyEvent(KeyEvent e) {
+               if (e.getID() == KeyEvent.KEY_PRESSED && planets != null) {
+                  keyPressed(e);
+               }
+               return true;        
+            }
+         });
    }
    
    //-------------------------------------------------------------------------------
@@ -125,7 +136,6 @@ public class Code extends JFrame implements GLEventListener, KeyListener {
       myPanel = new GLJPanel();
       myPanel.setBounds(0, 0, 1000, 1000);
       myPanel.addGLEventListener(this);
-      myPanel.addKeyListener(this);
       myPanel.setFocusable(true);
       myPanel.addMouseListener(new MouseAdapter() {
          public void mouseClicked(MouseEvent e) { myPanel.requestFocus(); }
@@ -160,6 +170,7 @@ public class Code extends JFrame implements GLEventListener, KeyListener {
       });
       
       this.add(layeredPane);
+      this.setFocusable(true);
       this.setVisible(true);
       myPanel.requestFocus();
    }
@@ -689,23 +700,24 @@ public class Code extends JFrame implements GLEventListener, KeyListener {
    
    //Loads Textures
    private void loadTextures() {
-      sunTexture = Utils.loadTexture("sun.jpg");
-      skydomeTexture = Utils.loadTexture("skydome.png");
-      asteroidTexture = Utils.loadTexture("asteroidBelt.png");
-      saturnRingTexture = Utils.loadTexture("saturnsRings.png");
+      String path = "textures/";
+      sunTexture = Utils.loadTexture(path + "sun.jpg");
+      skydomeTexture = Utils.loadTexture(path + "skydome.png");
+      asteroidTexture = Utils.loadTexture(path + "asteroidBelt.png");
+      saturnRingTexture = Utils.loadTexture(path + "saturnsRings.png");
       
       String[] textureFiles = {"mercury.jpg", "venus.jpg", "earth.jpg", "mars.jpg", 
                                "jupiter.jpg", "saturn.jpg", "uranus.jpg", "neptune.jpg", "pluto.jpg"};
       for (int i = 0; i < planets.length; i++) {
-         planets[i].texture = Utils.loadTexture(textureFiles[i]);
+         planets[i].texture = Utils.loadTexture(path + textureFiles[i]);
       }
       
       // Moon textures
-      planets[2].moonTextures[0] = Utils.loadTexture("moon.jpg");
-      planets[4].moonTextures[0] = Utils.loadTexture("io.jpg");
-      planets[4].moonTextures[1] = Utils.loadTexture("europa.jpg");
-      planets[4].moonTextures[2] = Utils.loadTexture("ganymede.jpg");
-      planets[4].moonTextures[3] = Utils.loadTexture("callisto.jpg");
+      planets[2].moonTextures[0] = Utils.loadTexture(path + "moon.jpg");
+      planets[4].moonTextures[0] = Utils.loadTexture(path + "io.jpg");
+      planets[4].moonTextures[1] = Utils.loadTexture(path + "europa.jpg");
+      planets[4].moonTextures[2] = Utils.loadTexture(path + "ganymede.jpg");
+      planets[4].moonTextures[3] = Utils.loadTexture(path + "callisto.jpg");
    }
       
    //-------------------------------------------------------------------------------
@@ -1032,6 +1044,8 @@ public class Code extends JFrame implements GLEventListener, KeyListener {
    
    //Controls
    public void keyPressed(KeyEvent e) {
+      
+      if (planets == null) return; 
       float gt = timeStopped ? frozenTime : (System.currentTimeMillis() - startTime) / 1000.0f;
       
       switch (e.getKeyCode()) {
