@@ -63,38 +63,36 @@ This project implements a fully interactive solar system from scratch using core
 
 ```
 SolarSystem/
-├── code/
-│   ├── Code.java           # Main application class
-│   ├── Sphere.java         # Sphere geometry generator
-│   ├── Utils.java          # Shader loading, texture utilities
-│   ├── vertShader1.glsl    # Shadow pass vertex shader
-│   ├── fragShader1.glsl    # Shadow pass fragment shader
-│   ├── vertShader2.glsl    # Main render vertex shader
-│   └── fragShader2.glsl    # Main render fragment shader
-└── textures/
-    ├── sun.jpg
-    ├── mercury.jpg
-    ├── venus.jpg
-    ├── earth.jpg
-    ├── mars.jpg
-    ├── jupiter.jpg
-    ├── saturn.jpg
-    ├── uranus.jpg
-    ├── neptune.jpg
-    ├── pluto.jpg
-    ├── moon.jpg
-    ├── io.jpg
-    ├── europa.jpg
-    ├── ganymede.jpg
-    ├── callisto.jpg
-    ├── skydome.png
-    ├── asteroidBelt.png
-    └── saturnsRings.png
+└── src/
+    ├── code/
+    │   ├── Code.java           # Main application class
+    │   ├── Sphere.java         # Sphere geometry generator
+    │   ├── Utils.java          # Shader loading, texture utilities
+    │   ├── vertShader1.glsl    # Shadow pass vertex shader
+    │   ├── fragShader1.glsl    # Shadow pass fragment shader
+    │   ├── vertShader2.glsl    # Main render vertex shader
+    │   └── fragShader2.glsl    # Main render fragment shader
+    └── textures/
+        ├── sun.jpg
+        ├── mercury.jpg
+        ├── venus.jpg
+        ├── earth.jpg
+        ├── mars.jpg
+        ├── jupiter.jpg
+        ├── saturn.jpg
+        ├── uranus.jpg
+        ├── neptune.jpg
+        ├── pluto.jpg
+        ├── moon.jpg
+        ├── io.jpg
+        ├── europa.jpg
+        ├── ganymede.jpg
+        ├── callisto.jpg
+        ├── skydome.png
+        ├── asteroidBelt.png
+        └── saturnsRings.png
 ```
 
-> ⚠️ **Textures are not included in this repository.** See the [Textures](#-textures) section below.
-
----
 
 ## Setup & Installation
 
@@ -136,18 +134,6 @@ java -cp ".;jogl-all.jar;jogl-all-natives-windows-amd64.jar;gluegen-rt.jar;glueg
 
 ---
 
-## Textures
-
-Textures are **not included** in this repository due to copyright. You can find free planet textures at:
-
-- [Solar System Scope Textures](https://www.solarsystemscope.com/textures/) ← recommended
-- [NASA Visible Earth](https://visibleearth.nasa.gov/)
-- [JHT's Planetary Pixel Emporium](https://planetpixelemporium.com/planets.html)
-
-Once downloaded, rename them to match the filenames listed in the project structure above and place them in the `textures/` folder.
-
----
-
 ## Controls
 
 | Key | Action |
@@ -169,11 +155,16 @@ Once downloaded, rename them to match the filenames listed in the project struct
 
 ---
 
+
 ## Known Limitations 
 - Orbital inclinations are not simulated (all planets orbit on the same plane)
 - Planet sizes are not to scale with distances in realistic mode
 
 --- 
+## Acknowledgements 
+- Planetary textures from [Solar System Scope](https://www.solarsystemscope.com/textures/)
+---
+
 ## Author 
 
 #### Kaitlyn Morris | [LinkedIn](http://www.linkedin.com/in/kaitlyn-morris-) 
