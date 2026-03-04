@@ -1,156 +1,181 @@
 # Solar System Visualization
 
-An interactive 3D visualization of our Solar System built with Java and OpenGL (JOGL). Features realistic planetary motion, shadow mapping, and dual viewing modes.
+A real-time 3D solar system simulation built with Java and OpenGL (JOGL), featuring custom GLSL shaders, shadow mapping, procedural geometry, and two interactive camera modes. Developed as an honors project for CS 465 (Computer Graphics) at Western Illinois University.
+
+![Top Down](https://github.com/user-attachments/assets/683f06f3-b702-459b-b067-27b9e5ccf5da)
+---
+
+## Overview 
+This project implements a fully interactive solar system from scratch using core OpenGL concepts — no game engine, no high-level framework. Every celestial body, shader, and rendering pass was built and tuned by hand, giving me deep hands-on experience with the graphics pipeline, 3D mathematics, and real-time rendering techniques.
+
+---
 
 ## Features
 
-- **Dual View Modes**
-  - Navigation Mode: Fly through the solar system and visit each planet up close
-  - Top-Down Mode: View the entire solar system from above with realistic or scaled distances
+#### Dual View Modes
+- **Navigation Mode** — Fly through the solar system and visit each planet up close with smooth interpolated camera transitions
+- **Top-Down Mode** — View the entire solar system from above, with toggleable realistic or scaled orbital distances
 
-- **Advanced Graphics**
-  - Real-time shadow mapping for Earth and Jupiter's moons
-  - Textured planets, moons, and rings
-  - Saturn's iconic ring system
-  - Asteroid and Kuiper belts
-  - High-resolution space skybox
+#### Rendering & Graphics
+- Real-time shadow mapping using a two-pass rendering pipeline (Earth and Jupiter's moons)
+- Custom GLSL vertex and fragment shaders for lighting and shadow calculations
+- High-resolution texture mapping on all planets, moons, and rings
+- Saturn's ring system, asteroid belt, and Kuiper belt
+- High-resolution space skybox
 
-- **Interactive Controls**
-  - Smooth camera transitions between celestial bodies
-  - Time control (pause/play orbital motion)
-  - Direct planet navigation (jump to any planet)
-  - Toggle between viewing modes
+#### Orbital Mechanics
+- Realistic orbital speeds relative to actual planetary periods
+- Continuous axial rotation for all planets and moons
+- Toggleable scaling between realistic and visualization-friendly distances
 
-## Screenshots
+#### Interactive Controls
+- Smooth camera transitions with smoothstep interpolation
+- Time control (pause/resume orbital motion)
+- Direct navigation to any celestial body
 
-![Navigation Mode](screenshots/navigation-mode.png)
-*Close-up view of Saturn with its rings*
+---
 
-![Top-Down View](screenshots/topdown-realistic.png)
-*Realistic distances showing the vast scale of our solar system*
+## Technical Highlights 
 
-![Scaled View](screenshots/topdown-scaled.png)
-*Scaled view for easier visualization of inner and outer planets*
+#### Rendering Pipeline
+- **Shadow Pass** — Scene rendered from the light's perspective to generate a depth map
+- **Main Pass** — Full scene rendered with lighting, textures, and shadow application using the depth map
 
-## Demo
+#### Graphics Techniques
+- Two-pass shadow mapping for realistic moon shadows
+- Procedural sphere geometry generation (Sphere.java)
+- JOML for matrix transformations (model, view, projection)
+- Smoothstep interpolation for camera transitions
 
-![Solar System Demo](screenshots/demo.gif)
+---
 
-## Technologies Used
+## Technologies
 
-- **Java** - Core programming language
-- **JOGL (Java OpenGL)** - OpenGL bindings for 3D rendering
-- **JOML** - Java mathematics library for 3D transformations
-- **GLSL** - Shader programming for lighting and shadows
+- **Java** (JDK 11+)
+- **JOGL** (Java OpenGL) — rendering and shader pipeline
+- **JOML** — matrix and vector math
+- **GLSL** — custom vertex and fragment shaders with Phong lighting and shadow mapping
+- **Swing / AWT** — windowing and UI overlay
 
-## Requirements
-
-- Java JDK 8 or higher
-- JOGL libraries (included in `lib/` folder)
-- JOML library
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/solar-system-visualization.git
-cd solar-system-visualization
-```
-
-2. Ensure JOGL and JOML libraries are in your classpath
-
-3. Compile and run:
-```bash
-javac -cp "lib/*:." src/code/Code.java
-java -cp "lib/*:src" code.Code
-```
-
-## Controls
-
-### Navigation Mode
-- **[T]** - Toggle between Navigation and Top-Down modes
-- **[→]** - Fly to next planet (or skip current transition)
-- **[0-9]** - Jump directly to a celestial body:
-  - 0: Sun
-  - 1: Mercury
-  - 2: Venus
-  - 3: Earth (with Moon)
-  - 4: Mars
-  - 5: Jupiter (with Galilean moons)
-  - 6: Saturn (with rings)
-  - 7: Uranus
-  - 8: Neptune
-  - 9: Pluto
-- **[R]** - Pause/Resume time
-
-### Top-Down Mode
-- **[T]** - Toggle to Navigation mode
-- **[V]** - Switch between Realistic and Scaled views
-- **[R]** - Pause/Resume planetary orbits
-
-## Technical Highlights
-
-### Graphics Features
-- **Shadow Mapping**: Implements two-pass rendering for realistic moon shadows on Earth and Jupiter
-- **Shader Programming**: Custom GLSL vertex and fragment shaders for lighting calculations
-- **Texture Mapping**: High-resolution textures applied to all celestial bodies
-- **Smooth Transitions**: Interpolated camera movement with smoothstep function
-
-### Rendering Pipeline
-1. **Shadow Pass**: Renders scene from light's perspective to generate shadow map
-2. **Main Pass**: Renders full scene with lighting, textures, and shadow application
-
-### Orbital Mechanics
-- Realistic orbital speeds (relative to actual planetary periods)
-- Proper orbital radii with toggleable scaling for visualization
-- Continuous rotation for planets and moons
+---
 
 ## Project Structure
 
-- `Code.java` - Main application class with rendering logic
-- `vertShader1.glsl` / `fragShader1.glsl` - Shadow pass shaders
-- `vertShader2.glsl` / `fragShader2.glsl` - Main rendering shaders
-- `Utils.java` - Utility class for shader compilation and texture loading
-- `Sphere.java` - Procedural sphere geometry generation
+```
+SolarSystem/
+├── code/
+│   ├── Code.java           # Main application class
+│   ├── Sphere.java         # Sphere geometry generator
+│   ├── Utils.java          # Shader loading, texture utilities
+│   ├── vertShader1.glsl    # Shadow pass vertex shader
+│   ├── fragShader1.glsl    # Shadow pass fragment shader
+│   ├── vertShader2.glsl    # Main render vertex shader
+│   └── fragShader2.glsl    # Main render fragment shader
+└── textures/
+    ├── sun.jpg
+    ├── mercury.jpg
+    ├── venus.jpg
+    ├── earth.jpg
+    ├── mars.jpg
+    ├── jupiter.jpg
+    ├── saturn.jpg
+    ├── uranus.jpg
+    ├── neptune.jpg
+    ├── pluto.jpg
+    ├── moon.jpg
+    ├── io.jpg
+    ├── europa.jpg
+    ├── ganymede.jpg
+    ├── callisto.jpg
+    ├── skydome.png
+    ├── asteroidBelt.png
+    └── saturnsRings.png
+```
 
-## Educational Information
+> ⚠️ **Textures are not included in this repository.** See the [Textures](#-textures) section below.
 
-When viewing each planet in Navigation Mode, you'll see fascinating facts about:
-- Physical characteristics
-- Unique features
-- Moons and ring systems
-- Position in the solar system
+---
 
-## Known Limitations
+## Setup & Installation
 
+### Prerequisites
+
+- Java JDK 11 or higher
+- [JOGL](https://jogamp.org/deployment/jogamp-current/archive/) — download the full platform bundle
+- [JOML](https://github.com/JOML-CI/JOML/releases) — download the latest `.jar`
+
+### Required JARs
+
+Add all of the following to your classpath:
+
+| JAR | Source |
+|-----|--------|
+| `jogl-all.jar` | JogAmp |
+| `jogl-all-natives-windows-amd64.jar` | JogAmp (or your platform) |
+| `gluegen-rt.jar` | JogAmp |
+| `gluegen-rt-natives-windows-amd64.jar` | JogAmp (or your platform) |
+| `joml-x.x.x.jar` | JOML GitHub releases |
+
+> If you're on Mac or Linux, replace `windows-amd64` with your platform (e.g. `linux-amd64`, `macosx-universal`).
+
+### Running in jGRASP
+
+1. Go to **Settings → PATH/CLASSPATH → Workspace → CLASSPATH**
+2. Add all JARs listed above
+3. Open `Code.java` and click **Run**
+
+### Running from the Command Line
+
+```bash
+javac -cp ".;jogl-all.jar;gluegen-rt.jar;joml-x.x.x.jar" code/Code.java code/Sphere.java code/Utils.java
+
+java -cp ".;jogl-all.jar;jogl-all-natives-windows-amd64.jar;gluegen-rt.jar;gluegen-rt-natives-windows-amd64.jar;joml-x.x.x.jar" code.Code
+```
+
+> On Mac/Linux use `:` instead of `;` as the classpath separator.
+
+---
+
+## Textures
+
+Textures are **not included** in this repository due to copyright. You can find free planet textures at:
+
+- [Solar System Scope Textures](https://www.solarsystemscope.com/textures/) ← recommended
+- [NASA Visible Earth](https://visibleearth.nasa.gov/)
+- [JHT's Planetary Pixel Emporium](https://planetpixelemporium.com/planets.html)
+
+Once downloaded, rename them to match the filenames listed in the project structure above and place them in the `textures/` folder.
+
+---
+
+## Controls
+
+| Key | Action |
+|-----|--------|
+| `T` | Toggle between Top-Down and Navigation mode |
+| `V` | Toggle scaled / realistic orbital view *(Top-Down only)* |
+| `R` | Play / Pause time |
+| `→` | Fly to next planet *(Navigation mode)* |
+| `0` | Jump to Sun |
+| `1` | Jump to Mercury |
+| `2` | Jump to Venus |
+| `3` | Jump to Earth |
+| `4` | Jump to Mars |
+| `5` | Jump to Jupiter |
+| `6` | Jump to Saturn |
+| `7` | Jump to Uranus |
+| `8` | Jump to Neptune |
+| `9` | Jump to Pluto |
+
+---
+
+## Known Limitations 
 - Orbital inclinations are not simulated (all planets orbit on the same plane)
 - Planet sizes are not to scale with distances in realistic mode
-- Texture quality depends on available source images
 
-## Future Enhancements
+--- 
+## Author 
 
-- [ ] Add comet trajectories
-- [ ] Implement planetary axial tilts
-- [ ] Include more moons for outer planets
-- [ ] Add constellation overlay
-- [ ] Spacecraft trajectory visualization
-
-## Acknowledgments
-
-- Planetary textures from [Solar System Scope](https://www.solarsystemscope.com/textures/)
-- Created as an honors project for CS 465 (Computer Graphics)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Author
-
-**Kaitlyn Morris**
-
-Feel free to reach out with questions or suggestions!
-```
-bin/
-out/
-.idea/
-*.iml
+#### Kaitlyn Morris | [LinkedIn](http://www.linkedin.com/in/kaitlyn-morris-) 
+---
+*Licensed under the [MIT License](LICENSE).*
